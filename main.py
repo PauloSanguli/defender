@@ -14,7 +14,7 @@ if __name__ == "__main__":
     scanFrame = ScreenScan()
     fixingFrame = ScreenFixing()
     guardianFrame = ScreenGuardian()
-    print("...")
+    
     frameInitial = ScreenInitial(app, scanFrame, guardianFrame, fixingFrame)
     app.mainloop()
-    print("111")
+    

@@ -16,12 +16,12 @@ from src.components.menu import MenuComponent as Menu
 class ScreenHeader:
     menuOn = False
     
-    def __init__(self, root, page_title, widgets, actual, fixing=None,logo = "defender-2.png"):
-        self.menu = Menu(root, widgets, actual, fixing)
+    def __init__(self, root, page_title, widgets, actual, logo = "defender-2.png"):
+        self.menu = Menu(root, widgets, actual, widgets[actual])
         self.screen = CTkFrame(root,fg_color=pallete.WHITE.value)
         self.screen.place(rely=0.04, relx=0.02, relwidth=0.96, relheight=0.14)
         self.__widgets_header(page_title, logo)
-        
+    
     def __widgets_header(self, title, logo) -> None:
         """widgets for home page"""
         self.imageDefenderApp = image.load_image(self.screen, logo,

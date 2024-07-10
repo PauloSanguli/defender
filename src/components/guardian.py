@@ -10,7 +10,7 @@ from src.components.header import ScreenHeader
 
 from src.components.images import LoaderImage as image
 
-
+from feats import guardian as Guardian
 
 
 
@@ -45,6 +45,7 @@ class ScreenGuardian:
                                     corner_radius=50,
                                     font=("Inter", 18),
                                     height=40,
+                                    command=lambda: self.activate_guardian,
                                     hover_color=pallete.GREEN_SECONDARY.value).\
                                         place(relx=0.52,rely=0.56)
         self.btnDeactivate = CTkLabel(self.screen, text="Desactivar",
@@ -76,5 +77,10 @@ class ScreenGuardian:
         # self.btnOnOff = image.load_image(self.frameConf1, "on.png", CTkButton, (50,20),pallete.WHITE.value).pack()
     
     @classmethod
+    def activate_guardian(self):
+        Guardian()
+    
+    @classmethod
     def destroy_widget(self):
         self.screen.destroy()
+        

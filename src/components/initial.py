@@ -29,7 +29,7 @@ class ScreenInitial:
         """"widgets for frame initial"""
         self.imageLogoButton = image.load_image(self.screen,"defender-1.png", CTkButton, (110,110), pallete.GREEN_PRIMARY.value)
         self.imageLogoButton.configure(hover_color=pallete.GREEN_PRIMARY.value,
-            command=self.destroy_screen)
+            command=self.destroy_widget)
         self.imageLogoButton.pack(fill="both", expand=True, padx=1, pady=0)
         
         self.imageWave = image.load_image(
@@ -37,10 +37,11 @@ class ScreenInitial:
             CTkLabel,(self.root.winfo_screenwidth(), 100), pallete.GREEN_PRIMARY.value)
         self.imageWave.pack()
         
-        self.screen.after(5000, self.destroy_screen)
+        self.screen.after(5000, self.destroy_widget)
 
 
-    def destroy_screen(self):
+    def destroy_widget(self):
         """deatroy the frame"""
         self.screen.destroy()
-        homePage = ScreenHome(self.root, self.scan, self.guardian, self.fixing)
+        homePage = ScreenHome()
+        homePage.set_screen(self.root, self.scan, self.guardian, self.fixing)

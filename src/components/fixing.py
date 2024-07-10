@@ -20,7 +20,7 @@ class ScreenFixing:
     @classmethod
     def set_screen(self, root, widgets):
         """set up the screen for fixing"""
-        self.screen = CTkFrame(root, fg_color=pallete.WHITE.value)
+        self.screen = CTkFrame(widgets["root"], fg_color=pallete.WHITE.value)
         self.screen.place(rely=0,relx=0,relwidth=1.0,relheight=1.0)
         header = ScreenHeader(self.screen, "Fixing", widgets, "fixing")
 

@@ -56,6 +56,7 @@ class ScreenScan:
     
     @classmethod
     def scan_device(self, root, dir="C://users/Paulo Sanguli/", mask=None, typeScan="device", widgets=None):
+        print(f"SCREEN: {root}")
         self.cron = sched()
         self.root = root
         self.mask = mask
@@ -63,7 +64,7 @@ class ScreenScan:
         self.screen = CTkFrame(self.root, fg_color=pallete.WHITE.value)
         self.screen.pack(fill="both", expand=True)
         self.root.config(background=pallete.WHITE.value)
-        self.header = ScreenHeader(self.screen,"Scanear dispositivo", self.widgets, f"scan-{typeScan}")
+        self.header = ScreenHeader(self.screen,"Scanear dispositivo", self.widgets, "scan")
         
         self.labelHead = CTkLabel(self.screen,
                                   text="Scan device",
@@ -213,7 +214,7 @@ class ScreenScan:
     def go_home(self) -> None:
         """go to the screen home"""
         self.destroy_widget()
-        self.widgets[0](self.root, self.widgets[1], self.widgets[3], self.widgets[2])
+        self.widgets["home"].set_screen(self.root, self.widgets["scan"], self.widgets["guardian"], self.widgets["fixing"])
     
     @classmethod
     def destroy_widget(self):

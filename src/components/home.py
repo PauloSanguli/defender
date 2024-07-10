@@ -15,7 +15,9 @@ from src.components.mask import ScreenMask
 
 
 class ScreenHome:
-    def __init__(self, root, scan, guardian, fixing):
+    # def __init__(self, root, scan, guardian, fixing):
+    @classmethod
+    def set_screen(self, root, scan, guardian, fixing):
         self.root = root
         self.scan = scan
         self.mask = ScreenMask()
@@ -25,16 +27,18 @@ class ScreenHome:
         self.screen = CTkFrame(root, fg_color=pallete.WHITE.value)
         self.__position_frame()
         self.__widgets_home()
-    
+        
+    @classmethod
     def __position_frame(self) -> None:
         """set position of frame"""
         self.screen.pack(fill="both", expand=True)
     
+    @classmethod
     def __widgets_home(self):
         """"widgets for frame initial"""
         self.migrate_widgets()
         self.scan.WIDGETS = self.widgets_migration
-        header = ScreenHeader(self.screen, "Home", self.widgets_migration, "home", self.fixing)
+        header = ScreenHeader(self.screen, "Home", self.widgets_migration, "home")
         # self.frameInfo = CTkFrame(self.screen,fg_color=pallete.RED.value)
         # self.frameInfo.place(rely=0.3, relx=0.02, relwidth=0.96, relheight=0.14)
 
@@ -130,9 +134,9 @@ class ScreenHome:
         self.imageRocket = image.load_image(self.screen, "rocket.png", CTkLabel, (120, 120), pallete.WHITE.value)
         self.imageRocket.place(relx=0.84, rely=0.72)
         
+    @classmethod
     def redirect_screen(self, type_event="dir") -> None:
         """destroy this screen"""
-        print(self.scan.WIDGETS)
         self.screen.destroy()
         if type_event == "dir":
             self.mask.select_dir(self.root, self.scan, ScreenHome=ScreenHome, widgets=self.widgets_migration)
@@ -150,20 +154,25 @@ class ScreenHome:
                 widgets=self.widgets_migration
             )
         elif type_event == "guardian":
-            print("guardian")
             self.guardian.set_screen(self.root, self.widgets_migration)
         elif type_event == "fixing":
             self.fixing.set_screen(self.root, self.widgets_migration)
 
+    @classmethod
     def migrate_widgets(self):
         """set widgets to an list and migrate"""
-        self.widgets_migration = []
-        self.widgets_migration.append(ScreenHome)
-        self.widgets_migration.append(self.scan)
-        self.widgets_migration.append(self.fixing)
-        self.widgets_migration.append(self.guardian)
-        self.widgets_migration.append(self.mask)
-        self.widgets_migration.append(self.screen)
+        home = ScreenHome()
+        self.widgets_migration = {
+            "home": home,
+            "fixing": self.fixing,
+            "scan": self.scan,
+            "guardian": self.guardian,
+            "mask": self.mask,
+            "screen": self.screen,
+            "root": self.root
+            # "home-instance": ScreenHome
+        }
     
+    @classmethod
     def destroy_widget(self):
         self.screen.destroy_widget()

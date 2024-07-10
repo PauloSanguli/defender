@@ -59,10 +59,10 @@ class ScreenMask:
     def delete_files(self, root, widgets, modal="modal-1.png") -> None:
         """screen for delete files"""
         self.root = root
-        self.screen_home = widgets[0]
-        self.scan = widgets[1]
-        self.fixing = widgets[2]
-        self.guardian = widgets[3]
+        self.screen_home = widgets["home"]
+        self.scan = widgets["scan"]
+        self.fixing = widgets["fixing"]
+        self.guardian = widgets["guardian"]
         self.create_screen(root, modal)
 
         self.labelHeadDelete = CTkLabel(self.screen,
@@ -205,8 +205,8 @@ class ScreenMask:
     def __go_home(self) -> None:
         """go to screen home"""
         self.destroy_widget()
-        print(self.SCREEN_HOME)
-        self.screen_home(self.root, self.scan, self.guardian, self.fixing)
+        
+        self.screen_home.set_screen(self.root, self.scan, self.guardian, self.fixing)
 
     @classmethod
     def destroy_widget(self):

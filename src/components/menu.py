@@ -8,42 +8,29 @@ from src.components.images import LoaderImage as loader_image
 
 
 class MenuComponent:
-    def __init__(self, root, funcs, actual, fixing):
+    def __init__(self, root, funcs, actual, to_delete):
+        print(f"ROOT: {root}")
         self.root = root
-        self.fixing = fixing
-        self.scanDevice = ...
-        self.scanDevice = ...
-        self.scanDevice = ...
-        self.home = funcs[0]
+        self.to_delete = to_delete
+        self.actual_screen = actual
+        self.fixing = funcs["fixing"]
+        self.home = funcs["home"]
         self.widgets = funcs
-        # self.actualScreen = {
-        #     "scan-dir": 2,
-        #     "scan-device": 3,
-        #     "scan-usb": 4,
-        #     "guardian": 5,
-        #     "home": 0,
-        #     "fixing": 1
-        # }[actual]
-        self.funcs = [
-            funcs[0],
-            funcs[4],funcs[1]
-            ,funcs[1],funcs[3]]
-        # self.widgets_images = [
-        #     "scan_dir_ico.png","scan_device_ico.png",
-        #     "scan_usb_ico.png", "guardian-logo-1.png"
-        # ]
     
-    def clean_windows(self, ty):
+    def clean_windows(self, clicked):
         """destroy all widgets from root"""
-        for index,widget in enumerate(self.funcs):
-                try:
-                    widget.destroy_widget()
-                except:
-                    print(index)
-        if ty =="fixing":
-            self.fixing.set_screen(self.root, self.widgets)
-        elif ty == "home":
-            self.home(self.root, self.funcs[1], self.funcs[3], self.fixing)
+        if self.actual_screen == clicked:
+            ...
+        else:
+            try:
+                self.to_delete.destroy_widget()
+            except:
+                self.to_delete.redirect_screen("fixing")
+            if clicked == "home":
+                self.home.set_screen(self.widgets["root"], self.widgets["scan"], self.widgets["guardian"], self.fixing)
+            elif clicked == "fixing":
+                self.fixing.set_screen(self.widgets["root"], self.widgets)
+            
     
     def set_widgets(self):
         """set widgets on screen"""
